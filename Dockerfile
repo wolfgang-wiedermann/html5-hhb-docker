@@ -14,8 +14,11 @@ RUN apt-get update && \
                         openssh-client openssh-server && \
     rm -rf /var/lib/apt/lists/*
 
+# Akutelles stable Release holen
 RUN cd /var/www/html && mkdir fibu && cd fibu && git init && \
-    git remote add origin https://github.com/wolfgang-wiedermann/php_mobile_accounting.git && git pull origin master
+    git remote add origin https://github.com/wolfgang-wiedermann/php_mobile_accounting.git && \ 
+    git pull origin master && \
+    git checkout 03d0ddd3d40430aa7700a20
 
 # siehe: https://docs.docker.com/userguide/dockervolumes/#volume-def
 #VOLUME ["/etc/mysql", "/var/lib/mysql"]
