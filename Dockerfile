@@ -35,4 +35,8 @@ COPY config/.htaccess /var/www/html/fibu/.htaccess
 COPY config/.htpasswd /var/www/html/fibu/.htpasswd
 RUN chmod guo+x /bin/startup.sh
 
+# SSH-Zugriff für root hinzufügen (vgl. https://docs.docker.com/examples/running_ssh_service/)
+RUN echo 'root:password' | chpasswd
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 ENTRYPOINT ["/bin/startup.sh"]
